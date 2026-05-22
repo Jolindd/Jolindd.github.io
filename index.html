@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>博物馆文创产品的情感价值感知与购买意愿调查问卷</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", Arial, sans-serif;
+    background: linear-gradient(150deg, #f7f1e8 0%, #ede4d0 40%, #e8dcc8 100%);
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: linear-gradient(135deg, #7d1515 0%, #a82020 40%, #c03030 70%, #c8392d 100%);
+    color: white;
+    padding: 40px 36px 32px;
+    border-radius: 18px 18px 0 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(160,30,30,0.25);
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; left: -30px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .header-deco {
+    font-size: 40px;
+    margin-bottom: 14px;
+    position: relative; z-index: 1;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+  }
+  .header h1 {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    position: relative; z-index: 1;
+  }
+  .header .subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+    position: relative; z-index: 1;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+  }
+
+  /* ===== PROGRESS ===== */
+  .progress-bar-wrap {
+    background: #fff;
+    padding: 14px 28px;
+    border-bottom: 1px solid #f0e8de;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .progress-label { font-size: 12px; color: #999; white-space: nowrap; }
+  .progress-track {
+    flex: 1;
+    height: 7px;
+    background: #f0e8dc;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #a82020, #e8704a);
+    border-radius: 4px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    width: 0%;
+  }
+  .progress-pct { font-size: 12px; color: #c8392d; font-weight: 700; white-space: nowrap; min-width: 36px; text-align: right; }
+
+  /* ===== CARD ===== */
+  .card {
+    background: white;
+    border-radius: 0 0 18px 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.13);
+  }
+
+  /* ===== SECTION ===== */
+  .section {
+    padding: 30px 36px;
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #7d1515;
+    padding: 9px 16px;
+    background: linear-gradient(135deg, #fdf0ee, #fef6f4);
+    border-left: 4px solid #c8392d;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 22px;
+  }
+
+  /* ===== INTRO BOX ===== */
+  .intro-box {
+    background: linear-gradient(135deg, #fdf7f0, #fef9f5);
+    border: 1px solid #ebd8c5;
+    border-radius: 12px;
+    padding: 24px 26px;
+    margin-bottom: 20px;
+  }
+  .intro-box p {
+    font-size: 14px;
+    color: #4a4a4a;
+    line-height: 1.9;
+    margin-bottom: 10px;
+  }
+  .intro-box p:last-child { margin-bottom: 0; }
+  .intro-box strong { color: #7d1515; }
+  .intro-tip {
+    background: linear-gradient(135deg, #fffbeb, #fff8e0);
+    border: 1px solid #f0d080;
+    border-radius: 10px;
+    padding: 13px 18px;
+    font-size: 13px;
+    color: #856600;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.6;
+  }
+  .intro-tip .tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ===== QUESTION ===== */
+  .question { margin-bottom: 30px; }
+  .question-label {
+    font-size: 15px;
+    color: #1a1a1a;
+    font-weight: 600;
+    line-height: 1.65;
+    margin-bottom: 14px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .q-num {
+    background: linear-gradient(135deg, #c8392d, #e85c3e);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .q-desc {
+    font-size: 12px;
+    color: #999;
+    font-weight: 400;
+    margin-top: 5px;
+    font-style: italic;
+  }
+
+  /* ===== RADIO OPTIONS ===== */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 18px;
+    border: 1.5px solid #e8e0d5;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    color: #3c3c3c;
+    background: #fafaf8;
+    user-select: none;
+  }
+  .option-item:hover {
+    border-color: #c8392d;
+    background: #fff7f6;
+    transform: translateX(2px);
+  }
+  .option-item.selected {
+    border-color: #c8392d;
+    background: linear-gradient(135deg, #fff2f0, #ffefec);
+    color: #7d1515;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(200,57,45,0.12);
+  }
+  .option-item input[type="radio"] {
+    width: 18px; height: 18px;
+    accent-color: #c8392d;
+    flex-shrink: 0;
+  }
+
+  /* ===== LIKERT SCALE ===== */
+  .likert-group { margin-bottom: 26px; }
+  .likert-question {
+    font-size: 14px;
+    color: #1a1a1a;
+    line-height: 1.65;
+    margin-bottom: 12px;
+    padding: 0 4px;
+    display: flex;
+    gap: 7px;
+    align-items: flex-start;
+  }
+  .q-code {
+    color: #c8392d;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .scale-hint {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #bbb;
+    margin-bottom: 10px;
+    padding: 0 6px;
+  }
+  .likert-scale {
+    display: flex;
+    gap: 7px;
+    align-items: stretch;
+  }
+  .likert-option { flex: 1; text-align: center; cursor: pointer; }
+  .likert-option input { display: none; }
+  .likert-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 11px 4px;
+    border: 1.5px solid #e8e0d5;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #fafaf8;
+    height: 100%;
+  }
+  .likert-option label .num {
+    font-size: 20px;
+    font-weight: 700;
+    color: #777;
+    line-height: 1;
+  }
+  .likert-option label .txt {
+    font-size: 10px;
+    color: #bbb;
+    line-height: 1.3;
+    text-align: center;
+  }
+  .likert-option input:checked + label {
+    border-color: #c8392d;
+    background: linear-gradient(135deg, #ffe8e6, #ffefec);
+    box-shadow: 0 2px 10px rgba(200,57,45,0.15);
+  }
+  .likert-option input:checked + label .num { color: #c8392d; }
+  .likert-option input:checked + label .txt { color: #c8392d; }
+  .likert-option:hover label { border-color: #e0604d; background: #fff5f4; }
+
+  /* ===== SUBSECTION HEAD ===== */
+  .subsection-head {
+    background: linear-gradient(135deg, #7d1515, #a82020);
+    color: white;
+    padding: 9px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 22px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 3px 12px rgba(125,21,21,0.2);
+  }
+  .subsection-head .basis {
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.75;
+    font-style: italic;
+    margin-left: auto;
+  }
+
+  /* ===== TEXT INPUT ===== */
+  .text-input {
+    width: 100%;
+    padding: 13px 18px;
+    border: 1.5px solid #e8e0d5;
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: inherit;
+    background: #fafaf8;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+    color: #333;
+  }
+  .text-input:focus {
+    outline: none;
+    border-color: #c8392d;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(200,57,45,0.08);
+  }
+
+  /* ===== NAVIGATION ===== */
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 36px 28px;
+    gap: 12px;
+    border-top: 1px solid #f0e8de;
+  }
+  .btn {
+    padding: 12px 32px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .btn-prev {
+    background: #f0ebe2;
+    color: #999;
+  }
+  .btn-prev:hover { background: #e0d8cc; color: #666; }
+  .btn-next {
+    background: linear-gradient(135deg, #c8392d, #e8704a);
+    color: white;
+    box-shadow: 0 4px 16px rgba(200,57,45,0.32);
+  }
+  .btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(200,57,45,0.42); }
+  .btn-next:active { transform: translateY(0); }
+  .btn-submit {
+    background: linear-gradient(135deg, #1e8a52, #27ae60);
+    color: white;
+    flex: 1;
+    max-width: 280px;
+    box-shadow: 0 4px 16px rgba(39,174,96,0.32);
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(39,174,96,0.42); }
+
+  /* ===== REQUIRED / ERRORS ===== */
+  .required { color: #c8392d; margin-left: 2px; }
+  .error-msg {
+    color: #c8392d;
+    font-size: 12px;
+    margin-top: 8px;
+    display: none;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    background: #fff5f4;
+    border-radius: 6px;
+    border-left: 3px solid #c8392d;
+  }
+  .has-error .error-msg { display: flex; }
+
+  /* ===== THANK YOU / TERMINATED ===== */
+  .end-page {
+    display: none;
+    text-align: center;
+    padding: 64px 36px;
+    animation: fadeIn 0.5s ease;
+  }
+  .end-page.show { display: block; }
+  .end-icon { font-size: 72px; margin-bottom: 18px; }
+  .end-title { font-size: 26px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px; }
+  .end-sub { font-size: 14px; color: #888; line-height: 1.9; margin-bottom: 28px; }
+  .end-sign { font-size: 13px; color: #bbb; margin-top: 24px; font-style: italic; }
+
+  /* ===== DATA PANEL ===== */
+  .data-panel {
+    display: none;
+    position: relative;
+    max-width: 800px;
+    margin: 24px auto;
+    background: white;
+    border-radius: 18px;
+    padding: 30px 36px;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.1);
+  }
+  .data-panel.show { display: block; animation: fadeIn 0.3s ease; }
+  .data-panel h2 { font-size: 18px; color: #1a1a1a; margin-bottom: 20px; font-weight: 700; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; margin-bottom: 24px; }
+  .stat-card {
+    background: linear-gradient(135deg, #fdf7f0, #fef9f5);
+    border: 1px solid #ebd8c5;
+    border-radius: 12px;
+    padding: 16px 18px;
+    transition: transform 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-2px); }
+  .stat-card .label { font-size: 12px; color: #999; margin-bottom: 6px; }
+  .stat-card .value { font-size: 26px; font-weight: 800; color: #c8392d; line-height: 1; }
+  .stat-card .unit { font-size: 12px; color: #bbb; margin-top: 3px; }
+
+  .data-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .data-tab {
+    padding: 7px 20px;
+    border-radius: 20px;
+    border: 1.5px solid #e8e0d5;
+    font-size: 13px;
+    cursor: pointer;
+    background: white;
+    transition: all 0.2s;
+    font-family: inherit;
+    font-weight: 500;
+    color: #666;
+  }
+  .data-tab:hover { border-color: #c8392d; color: #c8392d; }
+  .data-tab.active { background: #c8392d; color: white; border-color: #c8392d; font-weight: 600; }
+
+  .data-content { display: none; }
+  .data-content.active { display: block; animation: fadeIn 0.25s ease; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    background: #f8f3ec;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #666;
+    border-bottom: 2px solid #e8ddd0;
+  }
+  td { padding: 9px 12px; border-bottom: 1px solid #f5efe8; color: #444; }
+  tr:hover td { background: #fdf8f5; }
+
+  .chart-bar-wrap { margin-bottom: 10px; }
+  .chart-bar-label { font-size: 12px; color: #666; margin-bottom: 5px; }
+  .chart-bar-row { display: flex; align-items: center; gap: 10px; }
+  .chart-bar-track { flex: 1; height: 18px; background: #f0e8dc; border-radius: 9px; overflow: hidden; }
+  .chart-bar-fill { height: 100%; background: linear-gradient(90deg, #c8392d, #e8704a); border-radius: 9px; transition: width 0.7s cubic-bezier(0.4,0,0.2,1); }
+  .chart-bar-num { font-size: 13px; color: #888; width: 36px; text-align: right; font-weight: 600; }
+  .chart-bar-pct { font-size: 11px; color: #bbb; width: 36px; }
+
+  .export-btns { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+  .btn-export {
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .btn-csv { background: linear-gradient(135deg, #1e8a52, #27ae60); color: white; }
+  .btn-json { background: linear-gradient(135deg, #1a6ba0, #2980b9); color: white; }
+  .btn-clear { background: linear-gradient(135deg, #c0392b, #e74c3c); color: white; }
+  .btn-export:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* ===== NOTICE BANNER ===== */
+  .notice-banner {
+    text-align: center;
+    padding: 10px 28px;
+    font-size: 12px;
+    color: #999;
+    background: #fdf8f5;
+    border-bottom: 1px solid #f0e8de;
+    display: none;
+  }
+  .notice-banner a { color: #c8392d; text-decoration: none; font-weight: 600; }
+  .notice-banner a:hover { text-decoration: underline; }
+
+  /* ===== PASSWORD MODAL ===== */
+  .pwd-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.55); z-index: 9999;
+    justify-content: center; align-items: center;
+  }
+  .pwd-overlay.show { display: flex; }
+  .pwd-dialog {
+    background: white; border-radius: 18px; padding: 36px 32px 28px;
+    width: 380px; max-width: 90vw; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    text-align: center; animation: fadeIn 0.25s ease;
+  }
+  .pwd-dialog .pwd-icon { font-size: 42px; margin-bottom: 14px; }
+  .pwd-dialog h3 { font-size: 17px; color: #1a1a1a; margin-bottom: 6px; }
+  .pwd-dialog .pwd-hint { font-size: 12px; color: #999; margin-bottom: 22px; line-height: 1.5; }
+  .pwd-dialog input {
+    width: 100%; padding: 12px 16px; font-size: 15px; font-family: inherit;
+    border: 2px solid #e0d5c8; border-radius: 12px; outline: none;
+    text-align: center; letter-spacing: 4px;
+    transition: border-color 0.2s;
+  }
+  .pwd-dialog input:focus { border-color: #c8392d; }
+  .pwd-dialog .pwd-err {
+    color: #e74c3c; font-size: 12px; margin-top: 8px; display: none;
+  }
+  .pwd-dialog .pwd-btns { display: flex; gap: 10px; margin-top: 20px; }
+  .pwd-dialog .pwd-btns button {
+    flex: 1; padding: 11px 0; border-radius: 10px; border: none;
+    font-size: 14px; font-family: inherit; font-weight: 600; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .pwd-btn-confirm { background: linear-gradient(135deg, #7d1515, #c8392d); color: white; }
+  .pwd-btn-confirm:hover { opacity: 0.9; }
+  .pwd-btn-cancel { background: #f5f0e8; color: #666; }
+  .pwd-btn-cancel:hover { background: #ebe4d8; }
+
+  /* ===== ADMIN ENTRY ===== */
+  .admin-entry {
+    text-align: center; padding: 14px; opacity: 0.35; cursor: pointer;
+    font-size: 11px; color: #999; transition: opacity 0.3s; user-select: none;
+    margin-top: 10px;
+  }
+  .admin-entry:hover { opacity: 0.7; }
+
+  /* ===== DATA PANEL CLOSE ===== */
+  .data-panel-close {
+    position: absolute; top: 14px; right: 18px;
+    background: none; border: none; font-size: 22px; color: #bbb; cursor: pointer;
+    padding: 4px 8px; border-radius: 6px; transition: all 0.2s;
+  }
+  .data-panel-close:hover { color: #666; background: #f5f0e8; }
+
+  /* ===== DIVIDER ===== */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e8ddd0, transparent);
+    margin: 8px 0 24px;
+  }
+
+  /* ===== STEP INDICATOR ===== */
+  .step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 28px 0;
+    background: white;
+  }
+  .step-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #e8ddd0;
+    transition: all 0.3s;
+  }
+  .step-dot.active { background: #c8392d; transform: scale(1.3); }
+  .step-dot.done { background: #f0a090; }
+
+  /* ===== MEDIA ===== */
+  @media (max-width: 600px) {
+    body { padding: 12px 10px; }
+    .section { padding: 20px 18px; }
+    .nav-bar { padding: 16px 18px 24px; }
+    .header { padding: 28px 20px 24px; }
+    .header h1 { font-size: 17px; }
+    .header-deco { font-size: 32px; }
+    .likert-scale { gap: 4px; }
+    .likert-option label { padding: 9px 2px; }
+    .likert-option label .num { font-size: 17px; }
+    .likert-option label .txt { font-size: 9px; }
+    .data-panel { padding: 20px 18px; }
+    .btn { padding: 11px 22px; font-size: 14px; }
+    .subsection-head .basis { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <div class="header-deco">👑</div>
+    <h1>博物馆文创产品的情感价值感知与<br>购买意愿调查问卷</h1>
+    <div class="subtitle">——以国博"凤冠冰箱贴"为例</div>
+    <div class="header-meta">
+      <span class="badge">📋 学术调查</span>
+      <span class="badge">🔒 匿名填写</span>
+      <span class="badge">⏱ 约3-5分钟</span>
+    </div>
+  </div>
+
+  <!-- ===== CARD ===== -->
+  <div class="card" id="main-card">
+
+    <!-- Step indicator -->
+    <div class="step-indicator" id="step-indicator">
+      <div class="step-dot active" id="dot-0"></div>
+      <div class="step-dot" id="dot-1"></div>
+      <div class="step-dot" id="dot-2"></div>
+      <div class="step-dot" id="dot-3"></div>
+      <div class="step-dot" id="dot-4"></div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-bar-wrap">
+      <span class="progress-label">填写进度</span>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <span class="progress-pct" id="progress-pct">0%</span>
+    </div>
+
+    <!-- Notice banner (shows if existing data) -->
+    <div class="notice-banner" id="notice-banner"></div>
+
+    <!-- ====== SECTION 0: 卷首语 ====== -->
+    <div class="section active" id="sec-0">
+      <div class="intro-box">
+        <p><strong>尊敬的女士/先生：</strong></p>
+        <p>您好！我是武夷学院的27届毕业生。为了解消费者对博物馆文创产品（以国博"凤冠冰箱贴"为例）的真实感知与评价，特开展此次学术调查。</p>
+        <p>本问卷采用<strong>匿名形式</strong>，所有数据仅用于<strong>学术统计分析</strong>，绝不涉及您的个人隐私或用于任何商业用途。填写大约需要占用您 <strong>3-5分钟</strong> 的时间。</p>
+        <p>您的真实回答对本研究至关重要，请您根据第一印象和实际体验放心填写。非常感谢您的支持与配合！</p>
+      </div>
+      <div class="intro-tip">
+        <span class="tip-icon">💡</span>
+        <span>本问卷共设有<strong>跳转逻辑</strong>：根据您对"凤冠冰箱贴"的接触情况，系统会自动引导您作答相关题目。如从未听说过该产品，问卷将在第一题结束后终止。</span>
+      </div>
+    </div>
+
+    <!-- ====== SECTION 1: 甄别题 ====== -->
+    <div class="section" id="sec-1">
+      <div class="section-title">第一部分：甄别与接触度</div>
+
+      <!-- Q1 -->
+      <div class="question" id="q1-wrap">
+        <div class="question-label">
+          <span class="q-num">Q1</span>
+          <div>您是否知道中国国家博物馆推出的"凤冠冰箱贴"？<span class="required">*</span></div>
+        </div>
+        <div class="options">
+          <label class="option-item" onclick="selectOption('q1','A')">
+            <input type="radio" name="q1" value="A"> A. 听说过，且购买过/拥有过
+          </label>
+          <label class="option-item" onclick="selectOption('q1','B')">
+            <input type="radio" name="q1" value="B"> B. 听说过，但未购买过
+          </label>
+          <label class="option-item" onclick="selectOption('q1','C')">
+            <input type="radio" name="q1" value="C"> C. 完全没听过
+          </label>
+        </div>
+        <div class="error-msg" id="q1-err">⚠ 请选择一项后继续。</div>
+      </div>
+
+      <!-- Q2 仅购买者 -->
+      <div class="question" id="q2-wrap" style="display:none;">
+        <div class="question-label">
+          <span class="q-num">Q2</span>
+          <div>
+            <div>（仅购买者作答）请问您是通过什么方式获得的？<span class="required">*</span></div>
+          </div>
+        </div>
+        <div class="options">
+          <label class="option-item" onclick="selectOption('q2','A')">
+            <input type="radio" name="q2" value="A"> A. 现场排队购买
+          </label>
+          <label class="option-item" onclick="selectOption('q2','B')">
+            <input type="radio" name="q2" value="B"> B. 网上抢购/找代购
+          </label>
+          <label class="option-item" onclick="selectOption('q2','C')">
+            <input type="radio" name="q2" value="C"> C. 朋友/家人赠送
+          </label>
+          <label class="option-item" onclick="selectOption('q2','D')">
+            <input type="radio" name="q2" value="D"> D. 其他
+          </label>
+        </div>
+        <div class="error-msg" id="q2-err">⚠ 请选择一项后继续。</div>
+      </div>
+
+      <!-- Q3 仅未购买者 -->
+      <div class="question" id="q3-wrap" style="display:none;">
+        <div class="question-label">
+          <span class="q-num">Q3</span>
+          <div>（仅未购买者作答）请问您对它的印象主要来自哪里？<span class="required">*</span></div>
+        </div>
+        <div class="options">
+          <label class="option-item" onclick="selectOption('q3','A')">
+            <input type="radio" name="q3" value="A"> A. 社交媒体（小红书/抖音/微博等）
+          </label>
+          <label class="option-item" onclick="selectOption('q3','B')">
+            <input type="radio" name="q3" value="B"> B. 看到朋友拥有/分享
+          </label>
+          <label class="option-item" onclick="selectOption('q3','C')">
+            <input type="radio" name="q3" value="C"> C. 新闻报道/博物馆宣传
+          </label>
+          <label class="option-item" onclick="selectOption('q3','D')">
+            <input type="radio" name="q3" value="D"> D. 其他
+          </label>
+        </div>
+        <div class="error-msg" id="q3-err">⚠ 请选择一项后继续。</div>
+      </div>
+    </div>
+
+    <!-- ====== SECTION 2: 情感价值感知量表 ====== -->
+    <div class="section" id="sec-2">
+      <div class="section-title">第二部分：情感价值感知量表（核心变量）</div>
+      <p style="font-size:13px;color:#777;line-height:1.7;margin-bottom:4px;">请根据您对"凤冠冰箱贴"的实际体验（购买者）或印象（未购买者），对以下描述进行评分。</p>
+      <div class="scale-hint" style="margin-top:14px;">
+        <span>1 = 非常不同意</span><span>2 = 不同意</span><span>3 = 一般</span><span>4 = 同意</span><span>5 = 非常同意</span>
+      </div>
+
+      <!-- A. 审美价值感知 -->
+      <div class="subsection-head">
+        🎨 A. 审美价值感知
+      </div>
+      <div class="likert-group" id="A1-wrap">
+        <div class="likert-question"><span class="q-code">A1.</span><span>该产品的<strong>外观设计</strong>非常好看，令人惊艳。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="A1" value="1" id="A1-1"><label for="A1-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="A1" value="2" id="A1-2"><label for="A1-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="A1" value="3" id="A1-3"><label for="A1-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="A1" value="4" id="A1-4"><label for="A1-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="A1" value="5" id="A1-5"><label for="A1-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="A1-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <div class="likert-group" id="A2-wrap">
+        <div class="likert-question"><span class="q-code">A2.</span><span>该产品的<strong>做工精细</strong>，细节处理非常到位。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="A2" value="1" id="A2-1"><label for="A2-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="A2" value="2" id="A2-2"><label for="A2-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="A2" value="3" id="A2-3"><label for="A2-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="A2" value="4" id="A2-4"><label for="A2-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="A2" value="5" id="A2-5"><label for="A2-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="A2-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <div class="likert-group" id="A3-wrap">
+        <div class="likert-question"><span class="q-code">A3.</span><span>该产品的<strong>质感</strong>很好，拿在手里感觉很精致。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="A3" value="1" id="A3-1"><label for="A3-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="A3" value="2" id="A3-2"><label for="A3-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="A3" value="3" id="A3-3"><label for="A3-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="A3" value="4" id="A3-4"><label for="A3-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="A3" value="5" id="A3-5"><label for="A3-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="A3-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <div class="likert-group" id="A4-wrap">
+        <div class="likert-question"><span class="q-code">A4.</span><span>该产品融合的<strong>AR技术</strong>（如扫码看动态）增加了视觉趣味性。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="A4" value="1" id="A4-1"><label for="A4-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="A4" value="2" id="A4-2"><label for="A4-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="A4" value="3" id="A4-3"><label for="A4-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="A4" value="4" id="A4-4"><label for="A4-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="A4" value="5" id="A4-5"><label for="A4-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="A4-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <!-- B. 文化价值感知 -->
+      <div class="subsection-head">
+        🏛️ B. 文化价值感知
+      </div>
+      <div class="likert-group" id="B1-wrap">
+        <div class="likert-question"><span class="q-code">B1.</span><span>该产品让我感受到了深厚的<strong>历史文化底蕴</strong>。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="B1" value="1" id="B1-1"><label for="B1-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="B1" value="2" id="B1-2"><label for="B1-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="B1" value="3" id="B1-3"><label for="B1-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="B1" value="4" id="B1-4"><label for="B1-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="B1" value="5" id="B1-5"><label for="B1-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="B1-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <div class="likert-group" id="B2-wrap">
+        <div class="likert-question"><span class="q-code">B2.</span><span>该产品还原了"<strong>凤冠</strong>"（孝端皇后）的古典之美。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="B2" value="1" id="B2-1"><label for="B2-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="B2" value="2" id="B2-2"><label for="B2-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="B2" value="3" id="B2-3"><label for="B2-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="B2" value="4" id="B2-4"><label for="B2-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="B2" value="5" id="B2-5"><label for="B2-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="B2-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <div class="likert-group" id="B3-wrap">
+        <div class="likert-question"><span class="q-code">B3.</span><span>拥有该产品让我产生了对"<strong>老祖宗</strong>"审美与智慧的自豪感。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="B3" value="1" id="B3-1"><label for="B3-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="B3" value="2" id="B3-2"><label for="B3-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="B3" value="3" id="B3-3"><label for="B3-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="B3" value="4" id="B3-4"><label for="B3-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="B3" value="5" id="B3-5"><label for="B3-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="B3-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <div class="likert-group" id="B4-wrap">
+        <div class="likert-question"><span class="q-code">B4.</span><span>我认为该产品是<strong>国博文化</strong>的优秀载体，具有纪念意义。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="B4" value="1" id="B4-1"><label for="B4-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="B4" value="2" id="B4-2"><label for="B4-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="B4" value="3" id="B4-3"><label for="B4-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="B4" value="4" id="B4-4"><label for="B4-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="B4" value="5" id="B4-5"><label for="B4-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="B4-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <!-- C. 社交价值感知 -->
+      <div class="subsection-head">
+        💬 C. 社交价值感知
+      </div>
+      <div class="likert-group" id="C1-wrap">
+        <div class="likert-question"><span class="q-code">C1.</span><span>该产品非常适合作为<strong>礼物</strong>送给朋友或亲人。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="C1" value="1" id="C1-1"><label for="C1-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="C1" value="2" id="C1-2"><label for="C1-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="C1" value="3" id="C1-3"><label for="C1-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="C1" value="4" id="C1-4"><label for="C1-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="C1" value="5" id="C1-5"><label for="C1-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="C1-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <div class="likert-group" id="C2-wrap">
+        <div class="likert-question"><span class="q-code">C2.</span><span>拥有该产品能让我在<strong>社交圈</strong>（朋友圈等）中获得认同或关注。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="C2" value="1" id="C2-1"><label for="C2-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="C2" value="2" id="C2-2"><label for="C2-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="C2" value="3" id="C2-3"><label for="C2-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="C2" value="4" id="C2-4"><label for="C2-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="C2" value="5" id="C2-5"><label for="C2-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="C2-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <div class="likert-group" id="C3-wrap">
+        <div class="likert-question"><span class="q-code">C3.</span><span>即使需要<strong>排队或很难抢到</strong>，我也认为拥有它是有价值的。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="C3" value="1" id="C3-1"><label for="C3-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="C3" value="2" id="C3-2"><label for="C3-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="C3" value="3" id="C3-3"><label for="C3-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="C3" value="4" id="C3-4"><label for="C3-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="C3" value="5" id="C3-5"><label for="C3-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="C3-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <div class="likert-group" id="C4-wrap">
+        <div class="likert-question"><span class="q-code">C4.</span><span>我会将其作为<strong>收藏品</strong>进行展示，而非仅仅作为日常用品。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="C4" value="1" id="C4-1"><label for="C4-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="C4" value="2" id="C4-2"><label for="C4-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="C4" value="3" id="C4-3"><label for="C4-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="C4" value="4" id="C4-4"><label for="C4-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="C4" value="5" id="C4-5"><label for="C4-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="C4-err">⚠ 请选择评分后继续。</div>
+      </div>
+    </div>
+
+    <!-- ====== SECTION 3: 满意度与购买意愿 ====== -->
+    <div class="section" id="sec-3">
+      <div class="section-title">第三部分：满意度与购买意愿</div>
+      <div class="scale-hint" style="margin-bottom:8px;">
+        <span>1 = 非常不同意</span><span>2 = 不同意</span><span>3 = 一般</span><span>4 = 同意</span><span>5 = 非常同意</span>
+      </div>
+
+      <!-- D. 满意度 -->
+      <div class="subsection-head" style="margin-top:16px;">
+        ⭐ D. 满意度
+      </div>
+      <div class="likert-group" id="D1-wrap">
+        <div class="likert-question"><span class="q-code">D1.</span><span>总体而言，我对该产品的<strong>满意度</strong>很高。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="D1" value="1" id="D1-1"><label for="D1-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="D1" value="2" id="D1-2"><label for="D1-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="D1" value="3" id="D1-3"><label for="D1-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="D1" value="4" id="D1-4"><label for="D1-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="D1" value="5" id="D1-5"><label for="D1-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="D1-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <div class="likert-group" id="D2-wrap">
+        <div class="likert-question"><span class="q-code">D2.</span><span>该产品给我的感觉<strong>超出了我的预期</strong>。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="D2" value="1" id="D2-1"><label for="D2-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="D2" value="2" id="D2-2"><label for="D2-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="D2" value="3" id="D2-3"><label for="D2-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="D2" value="4" id="D2-4"><label for="D2-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="D2" value="5" id="D2-5"><label for="D2-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="D2-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <!-- E. 购买意愿 -->
+      <div class="subsection-head">
+        🛒 E. 购买意愿
+      </div>
+      <div class="likert-group" id="E1-wrap">
+        <div class="likert-question"><span class="q-code">E1.</span><span>我打算<strong>购买</strong>（或推荐他人购买）该冰箱贴。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="E1" value="1" id="E1-1"><label for="E1-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="E1" value="2" id="E1-2"><label for="E1-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="E1" value="3" id="E1-3"><label for="E1-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="E1" value="4" id="E1-4"><label for="E1-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="E1" value="5" id="E1-5"><label for="E1-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="E1-err">⚠ 请选择评分后继续。</div>
+      </div>
+
+      <div class="likert-group" id="E2-wrap">
+        <div class="likert-question"><span class="q-code">E2.</span><span>如果有机会，我愿意为了<strong>入手</strong>该产品付出时间或金钱成本。<span class="required">*</span></span></div>
+        <div class="likert-scale">
+          <div class="likert-option"><input type="radio" name="E2" value="1" id="E2-1"><label for="E2-1"><span class="num">1</span><span class="txt">非常<br>不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="E2" value="2" id="E2-2"><label for="E2-2"><span class="num">2</span><span class="txt">不同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="E2" value="3" id="E2-3"><label for="E2-3"><span class="num">3</span><span class="txt">一般</span></label></div>
+          <div class="likert-option"><input type="radio" name="E2" value="4" id="E2-4"><label for="E2-4"><span class="num">4</span><span class="txt">同意</span></label></div>
+          <div class="likert-option"><input type="radio" name="E2" value="5" id="E2-5"><label for="E2-5"><span class="num">5</span><span class="txt">非常<br>同意</span></label></div>
+        </div>
+        <div class="error-msg" id="E2-err">⚠ 请选择评分后继续。</div>
+      </div>
+    </div>
+
+    <!-- ====== SECTION 4: 基本信息 ====== -->
+    <div class="section" id="sec-4">
+      <div class="section-title">第四部分：基本信息（统计变量）</div>
+
+      <div class="question" id="p1-wrap">
+        <div class="question-label">
+          <span class="q-num">P1</span>
+          <div>您的性别<span class="required">*</span></div>
+        </div>
+        <div class="options">
+          <label class="option-item" onclick="selectOption('p1','男')">
+            <input type="radio" name="p1" value="男"> 男
+          </label>
+          <label class="option-item" onclick="selectOption('p1','女')">
+            <input type="radio" name="p1" value="女"> 女
+          </label>
+        </div>
+        <div class="error-msg" id="p1-err">⚠ 请选择一项后继续。</div>
+      </div>
+
+      <div class="question" id="p2-wrap">
+        <div class="question-label">
+          <span class="q-num">P2</span>
+          <div>您的年龄<span class="required">*</span></div>
+        </div>
+        <div class="options">
+          <label class="option-item" onclick="selectOption('p2','18岁及以下')">
+            <input type="radio" name="p2" value="18岁及以下"> 18岁及以下
+          </label>
+          <label class="option-item" onclick="selectOption('p2','19-25岁')">
+            <input type="radio" name="p2" value="19-25岁"> 19-25岁
+          </label>
+          <label class="option-item" onclick="selectOption('p2','26-35岁')">
+            <input type="radio" name="p2" value="26-35岁"> 26-35岁
+          </label>
+          <label class="option-item" onclick="selectOption('p2','36-45岁')">
+            <input type="radio" name="p2" value="36-45岁"> 36-45岁
+          </label>
+          <label class="option-item" onclick="selectOption('p2','46岁及以上')">
+            <input type="radio" name="p2" value="46岁及以上"> 46岁及以上
+          </label>
+        </div>
+        <div class="error-msg" id="p2-err">⚠ 请选择一项后继续。</div>
+      </div>
+
+      <div class="question" id="p3-wrap">
+        <div class="question-label">
+          <span class="q-num">P3</span>
+          <div>您的职业<span class="required">*</span></div>
+        </div>
+        <div class="options">
+          <label class="option-item" onclick="selectOption('p3','在校学生')">
+            <input type="radio" name="p3" value="在校学生"> 在校学生
+          </label>
+          <label class="option-item" onclick="selectOption('p3','企业职员')">
+            <input type="radio" name="p3" value="企业职员"> 企业职员
+          </label>
+          <label class="option-item" onclick="selectOption('p3','事业单位/公务员')">
+            <input type="radio" name="p3" value="事业单位/公务员"> 事业单位/公务员
+          </label>
+          <label class="option-item" onclick="selectOption('p3','自由职业者')">
+            <input type="radio" name="p3" value="自由职业者"> 自由职业者
+          </label>
+          <label class="option-item" onclick="selectOption('p3','其他')">
+            <input type="radio" name="p3" value="其他"> 其他
+          </label>
+        </div>
+        <div class="error-msg" id="p3-err">⚠ 请选择一项后继续。</div>
+      </div>
+
+      <div class="question" id="p4-wrap">
+        <div class="question-label">
+          <span class="q-num">P4</span>
+          <div>您的月平均收入（或生活费）<span class="required">*</span></div>
+        </div>
+        <div class="options">
+          <label class="option-item" onclick="selectOption('p4','3000元及以下')">
+            <input type="radio" name="p4" value="3000元及以下"> 3000元及以下
+          </label>
+          <label class="option-item" onclick="selectOption('p4','3001-5000元')">
+            <input type="radio" name="p4" value="3001-5000元"> 3001-5000元
+          </label>
+          <label class="option-item" onclick="selectOption('p4','5001-8000元')">
+            <input type="radio" name="p4" value="5001-8000元"> 5001-8000元
+          </label>
+          <label class="option-item" onclick="selectOption('p4','8001-12000元')">
+            <input type="radio" name="p4" value="8001-12000元"> 8001-12000元
+          </label>
+          <label class="option-item" onclick="selectOption('p4','12000元以上')">
+            <input type="radio" name="p4" value="12000元以上"> 12000元以上
+          </label>
+        </div>
+        <div class="error-msg" id="p4-err">⚠ 请选择一项后继续。</div>
+      </div>
+
+      <div class="question">
+        <div class="question-label">
+          <span class="q-num" style="background:linear-gradient(135deg,#888,#aaa);">选填</span>
+          <div>如果您对本研究的最终分析结果感兴趣，欢迎留下您的邮箱（选填）</div>
+        </div>
+        <input type="email" class="text-input" id="email-input" placeholder="请输入您的邮箱地址（可不填）">
+      </div>
+    </div>
+
+    <!-- ====== THANK YOU ====== -->
+    <div class="end-page" id="thank-you">
+      <div class="end-icon">🎉</div>
+      <div class="end-title">感谢您的参与！</div>
+      <div class="end-sub">
+        您的回答已成功提交，每一个回答都为本研究提供了宝贵的数据支持。<br>
+        祝您生活愉快，万事如意！
+      </div>
+      <div class="end-sign">——武夷学院 27届毕业生</div>
+    </div>
+
+    <!-- ====== TERMINATED ====== -->
+    <div class="end-page" id="terminated">
+      <div class="end-icon">🙏</div>
+      <div class="end-title">感谢您的参与！</div>
+      <div class="end-sub">
+        由于本次研究需要筛选对"凤冠冰箱贴"有了解的受访者，<br>
+        问卷到此结束。感谢您抽出宝贵时间！
+      </div>
+      <div class="end-sign">——武夷学院 27届毕业生</div>
+    </div>
+
+    <!-- Nav bar -->
+    <div class="nav-bar" id="nav-bar">
+      <button class="btn btn-prev" id="btn-prev" onclick="prevSection()" style="display:none;">← 上一步</button>
+      <div style="flex:1;"></div>
+      <button class="btn btn-next" id="btn-next" onclick="nextSection()">开始填写 →</button>
+      <button class="btn btn-submit" id="btn-submit" onclick="submitSurvey()" style="display:none;">✓ 提交问卷</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== DATA PANEL ====== -->
+<div class="data-panel" id="data-panel">
+  <button class="data-panel-close" onclick="closeDataPanel()" title="关闭面板">✕</button>
+  <h2>📊 数据统计面板</h2>
+  <div class="stat-grid" id="stat-overview"></div>
+  <div class="data-tabs">
+    <button class="data-tab active" onclick="switchTab(this,'overview')">📋 概览统计</button>
+    <button class="data-tab" onclick="switchTab(this,'likert')">📈 量表分析</button>
+    <button class="data-tab" onclick="switchTab(this,'demo')">👥 人口统计</button>
+    <button class="data-tab" onclick="switchTab(this,'raw')">🗂 原始数据</button>
+  </div>
+  <div class="data-content active" id="tab-overview"><div id="overview-content"></div></div>
+  <div class="data-content" id="tab-likert"><div id="likert-content"></div></div>
+  <div class="data-content" id="tab-demo"><div id="demo-content"></div></div>
+  <div class="data-content" id="tab-raw"><div id="raw-content" style="overflow-x:auto;"></div></div>
+  <div class="export-btns">
+    <button class="btn-export btn-csv" onclick="exportCSV()">⬇ 导出 CSV（Excel）</button>
+    <button class="btn-export btn-json" onclick="exportJSON()">⬇ 导出 JSON</button>
+    <button class="btn-export btn-clear" onclick="clearData()">🗑 清空所有数据</button>
+  </div>
+</div>
+
+<!-- ====== PASSWORD MODAL ====== -->
+<div class="pwd-overlay" id="pwd-overlay">
+  <div class="pwd-dialog">
+    <div class="pwd-icon">🔒</div>
+    <h3>管理员验证</h3>
+    <p class="pwd-hint">此区域仅限问卷发布者访问。<br>请输入管理员密码以查看统计数据。</p>
+    <input type="password" id="pwd-input" placeholder="请输入密码" onkeydown="if(event.key==='Enter')verifyPassword()">
+    <div class="pwd-err" id="pwd-err">密码错误，请重试。</div>
+    <div class="pwd-btns">
+      <button class="pwd-btn-cancel" onclick="closePwdModal()">取消</button>
+      <button class="pwd-btn-confirm" onclick="verifyPassword()">验证</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== ADMIN ENTRY ====== -->
+<div class="admin-entry" onclick="openPwdModal()" title="管理员入口">🔑 管理员</div>
+
+<script>
+// =================== STATE ===================
+let currentSection = 0;
+const TOTAL_SECTIONS = 5;
+let q1Answer = '';
+
+// =================== UTILS ===================
+const $ = id => document.getElementById(id);
+function getVal(name) {
+  const el = document.querySelector(`input[name="${name}"]:checked`);
+  return el ? el.value : null;
+}
+
+// =================== PROGRESS & DOTS ===================
+function updateProgress() {
+  const pct = Math.round((currentSection / (TOTAL_SECTIONS - 1)) * 100);
+  $('progress-fill').style.width = pct + '%';
+  $('progress-pct').textContent = pct + '%';
+  // Update dots
+  for (let i = 0; i < TOTAL_SECTIONS; i++) {
+    const dot = $('dot-' + i);
+    if (!dot) continue;
+    dot.className = 'step-dot';
+    if (i < currentSection) dot.classList.add('done');
+    else if (i === currentSection) dot.classList.add('active');
+  }
+}
+
+// =================== OPTION SELECTION ===================
+function selectOption(name, val) {
+  document.querySelectorAll(`.option-item`).forEach(el => {
+    const inp = el.querySelector('input');
+    if (inp && inp.name === name) el.classList.remove('selected');
+  });
+  const inp = document.querySelector(`input[name="${name}"][value="${CSS.escape(val)}"]`);
+  if (inp) {
+    inp.checked = true;
+    inp.closest('.option-item').classList.add('selected');
+  }
+  if (name === 'q1') {
+    q1Answer = val;
+    $('q2-wrap').style.display = (val === 'A') ? 'block' : 'none';
+    $('q3-wrap').style.display = (val === 'B') ? 'block' : 'none';
+  }
+  clearError(name);
+}
+
+function clearError(name) {
+  const err = $(name + '-err');
+  if (err) {
+    err.style.display = 'none';
+    const wrap = $(name + '-wrap');
+    if (wrap) wrap.classList.remove('has-error');
+    else if (err.parentElement) err.parentElement.classList.remove('has-error');
+  }
+}
+
+// =================== SECTION NAVIGATION ===================
+function showSection(idx) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const sec = $('sec-' + idx);
+  if (sec) sec.classList.add('active');
+
+  $('btn-prev').style.display = (idx > 0) ? 'inline-block' : 'none';
+
+  const btnNext = $('btn-next');
+  const btnSubmit = $('btn-submit');
+  if (idx === TOTAL_SECTIONS - 1) {
+    btnNext.style.display = 'none';
+    btnSubmit.style.display = 'inline-block';
+  } else {
+    btnNext.style.display = 'inline-block';
+    btnSubmit.style.display = 'none';
+    btnNext.textContent = idx === 0 ? '开始填写 →' : '下一步 →';
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateProgress();
+}
+
+function nextSection() {
+  if (!validateSection(currentSection)) return;
+  if (currentSection === 1 && q1Answer === 'C') {
+    terminateSurvey();
+    return;
+  }
+  currentSection = Math.min(currentSection + 1, TOTAL_SECTIONS - 1);
+  showSection(currentSection);
+}
+
+function prevSection() {
+  if (currentSection > 0) {
+    currentSection--;
+    showSection(currentSection);
+  }
+}
+
+function terminateSurvey() {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  $('terminated').classList.add('show');
+  $('nav-bar').style.display = 'none';
+  $('progress-fill').style.width = '100%';
+  $('progress-pct').textContent = '结束';
+}
+
+// =================== VALIDATION ===================
+function showErr(name) {
+  const err = $(name + '-err');
+  if (err) {
+    err.style.display = 'flex';
+    const wrap = $(name + '-wrap');
+    if (wrap) wrap.classList.add('has-error');
+  }
+}
+
+function scrollToField(name) {
+  const el = $(name + '-wrap') || document.querySelector(`input[name="${name}"]`);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function validateSection(idx) {
+  if (idx === 0) return true;
+  if (idx === 1) {
+    if (!getVal('q1')) { showErr('q1'); scrollToField('q1'); return false; }
+    if (q1Answer === 'A' && !getVal('q2')) { showErr('q2'); scrollToField('q2'); return false; }
+    if (q1Answer === 'B' && !getVal('q3')) { showErr('q3'); scrollToField('q3'); return false; }
+    return true;
+  }
+  if (idx === 2) {
+    const fields = ['A1','A2','A3','A4','B1','B2','B3','B4','C1','C2','C3','C4'];
+    for (const f of fields) {
+      if (!getVal(f)) { showErr(f); scrollToField(f); return false; }
+    }
+    return true;
+  }
+  if (idx === 3) {
+    const fields = ['D1','D2','E1','E2'];
+    for (const f of fields) {
+      if (!getVal(f)) { showErr(f); scrollToField(f); return false; }
+    }
+    return true;
+  }
+  if (idx === 4) {
+    const fields = ['p1','p2','p3','p4'];
+    for (const f of fields) {
+      if (!getVal(f)) { showErr(f); scrollToField(f); return false; }
+    }
+    return true;
+  }
+  return true;
+}
+
+// =================== SUBMIT ===================
+function submitSurvey() {
+  if (!validateSection(4)) return;
+  const entry = {
+    timestamp: new Date().toISOString(),
+    q1: getVal('q1'), q2: getVal('q2') || '', q3: getVal('q3') || '',
+    A1: getVal('A1'), A2: getVal('A2'), A3: getVal('A3'), A4: getVal('A4'),
+    B1: getVal('B1'), B2: getVal('B2'), B3: getVal('B3'), B4: getVal('B4'),
+    C1: getVal('C1'), C2: getVal('C2'), C3: getVal('C3'), C4: getVal('C4'),
+    D1: getVal('D1'), D2: getVal('D2'),
+    E1: getVal('E1'), E2: getVal('E2'),
+    gender: getVal('p1'), age: getVal('p2'),
+    occupation: getVal('p3'), income: getVal('p4'),
+    email: $('email-input').value.trim()
+  };
+  let data = loadData();
+  data.push(entry);
+  localStorage.setItem('survey_data', JSON.stringify(data));
+
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  $('thank-you').classList.add('show');
+  $('nav-bar').style.display = 'none';
+  $('progress-fill').style.width = '100%';
+  $('progress-pct').textContent = '100%';
+  updateProgress();
+}
+
+// =================== DATA PANEL ===================
+function showDataPanel() {
+  if (!isAuthenticated()) { openPwdModal(); return; }
+  const panel = $('data-panel');
+  panel.classList.add('show');
+  renderStats();
+  panel.scrollIntoView({ behavior: 'smooth' });
+}
+
+function closeDataPanel() {
+  $('data-panel').classList.remove('show');
+}
+
+function switchTab(btn, name) {
+  document.querySelectorAll('.data-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.data-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  $('tab-' + name).classList.add('active');
+  renderStats();
+}
+
+function loadData() {
+  try { return JSON.parse(localStorage.getItem('survey_data') || '[]'); }
+  catch(e) { return []; }
+}
+
+function avg(data, fields) {
+  const vals = [];
+  data.forEach(d => fields.forEach(f => {
+    const v = parseInt(d[f]);
+    if (!isNaN(v) && v > 0) vals.push(v);
+  }));
+  return vals.length ? (vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(2) : '-';
+}
+
+function countField(data, field) {
+  const cnt = {};
+  data.forEach(d => {
+    const v = d[field] || '未填';
+    cnt[v] = (cnt[v]||0) + 1;
+  });
+  return cnt;
+}
+
+function renderBarChart(label, count, total) {
+  const pct = total ? Math.round(count/total*100) : 0;
+  return `<div class="chart-bar-wrap">
+    <div class="chart-bar-label">${label}</div>
+    <div class="chart-bar-row">
+      <div class="chart-bar-track"><div class="chart-bar-fill" style="width:${pct}%"></div></div>
+      <div class="chart-bar-num">${count}人</div>
+      <div class="chart-bar-pct">${pct}%</div>
+    </div>
+  </div>`;
+}
+
+function renderStats() {
+  const data = loadData();
+  const n = data.length;
+
+  // ---- Overview stat cards ----
+  $('stat-overview').innerHTML = `
+    <div class="stat-card"><div class="label">总回收份数</div><div class="value">${n}</div><div class="unit">份</div></div>
+    <div class="stat-card"><div class="label">购买者（Q1=A）</div><div class="value">${data.filter(d=>d.q1==='A').length}</div><div class="unit">人（${n?Math.round(data.filter(d=>d.q1==='A').length/n*100):0}%）</div></div>
+    <div class="stat-card"><div class="label">未购买者（Q1=B）</div><div class="value">${data.filter(d=>d.q1==='B').length}</div><div class="unit">人</div></div>
+    <div class="stat-card"><div class="label">审美均值(A)</div><div class="value">${avg(data,['A1','A2','A3','A4'])}</div><div class="unit">/ 5分</div></div>
+    <div class="stat-card"><div class="label">文化均值(B)</div><div class="value">${avg(data,['B1','B2','B3','B4'])}</div><div class="unit">/ 5分</div></div>
+    <div class="stat-card"><div class="label">社交均值(C)</div><div class="value">${avg(data,['C1','C2','C3','C4'])}</div><div class="unit">/ 5分</div></div>
+    <div class="stat-card"><div class="label">满意度均值(D)</div><div class="value">${avg(data,['D1','D2'])}</div><div class="unit">/ 5分</div></div>
+    <div class="stat-card"><div class="label">购买意愿均值(E)</div><div class="value">${avg(data,['E1','E2'])}</div><div class="unit">/ 5分</div></div>
+  `;
+
+  // ---- Overview content ----
+  if (n > 0) {
+    const q1cnt = countField(data, 'q1');
+    const q1map = {'A':'购买过','B':'未购买','C':'未听说'};
+    let html = '<h3 style="font-size:14px;color:#666;margin:0 0 12px;">Q1 接触情况分布</h3>';
+    Object.entries(q1cnt).forEach(([k,v]) => html += renderBarChart((q1map[k]||k), v, n));
+    $('overview-content').innerHTML = html;
+  } else {
+    $('overview-content').innerHTML = '<p style="color:#bbb;font-size:14px;padding:20px 0;">暂无数据，请完成问卷后查看。</p>';
+  }
+
+  // ---- Likert analysis ----
+  const likertFields = [
+    {code:'A1',label:'A1 外观设计非常好看'},{code:'A2',label:'A2 做工精细'},{code:'A3',label:'A3 质感很好'},{code:'A4',label:'A4 AR技术趣味性'},
+    {code:'B1',label:'B1 历史文化底蕴'},{code:'B2',label:'B2 凤冠古典之美'},{code:'B3',label:'B3 老祖宗自豪感'},{code:'B4',label:'B4 国博文化载体'},
+    {code:'C1',label:'C1 适合作为礼物'},{code:'C2',label:'C2 社交圈认同'},{code:'C3',label:'C3 排队也有价值'},{code:'C4',label:'C4 作为收藏品'},
+    {code:'D1',label:'D1 总体满意度高'},{code:'D2',label:'D2 超出预期'},
+    {code:'E1',label:'E1 打算购买/推荐'},{code:'E2',label:'E2 愿意付出成本'}
+  ];
+  const sectionLabels = {A1:'审美价值感知',B1:'文化价值感知',C1:'社交价值感知',D1:'满意度',E1:'购买意愿'};
+  if (n > 0) {
+    let html = '<table><thead><tr><th>题项</th><th>均值</th><th>分布条</th><th>样本量</th></tr></thead><tbody>';
+    let lastSection = '';
+    for (const f of likertFields) {
+      if (sectionLabels[f.code]) {
+        html += `<tr style="background:#f8f3ec;"><td colspan="4" style="font-weight:700;color:#7d1515;padding:10px 12px;">${sectionLabels[f.code]}</td></tr>`;
+      }
+      const vals = data.map(d=>parseInt(d[f.code])||0).filter(v=>v>0);
+      const mean = vals.length ? (vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(2) : '-';
+      const pct = vals.length ? Math.round((parseFloat(mean)-1)/4*100) : 0;
+      html += `<tr>
+        <td>${f.label}</td>
+        <td><strong style="color:#c8392d">${mean}</strong>/5</td>
+        <td style="min-width:120px;">
+          <div class="chart-bar-track" style="height:14px;">
+            <div class="chart-bar-fill" style="width:${pct}%;height:14px;"></div>
+          </div>
+        </td>
+        <td style="color:#aaa">${vals.length}</td>
+      </tr>`;
+    }
+    html += '</tbody></table>';
+    $('likert-content').innerHTML = html;
+  } else {
+    $('likert-content').innerHTML = '<p style="color:#bbb;font-size:14px;padding:20px 0;">暂无数据。</p>';
+  }
+
+  // ---- Demographics ----
+  if (n > 0) {
+    const gender = countField(data,'gender');
+    const age = countField(data,'age');
+    const occ = countField(data,'occupation');
+    const income = countField(data,'income');
+    let html = '';
+    const sections = [{title:'性别分布',cnt:gender},{title:'年龄分布',cnt:age},{title:'职业分布',cnt:occ},{title:'收入分布',cnt:income}];
+    sections.forEach(s => {
+      html += `<h3 style="font-size:14px;color:#666;margin:20px 0 10px;">${s.title}</h3>`;
+      Object.entries(s.cnt).forEach(([k,v]) => html += renderBarChart(k, v, n));
+    });
+    $('demo-content').innerHTML = html;
+  } else {
+    $('demo-content').innerHTML = '<p style="color:#bbb;font-size:14px;padding:20px 0;">暂无数据。</p>';
+  }
+
+  // ---- Raw data ----
+  if (n > 0) {
+    const cols = ['timestamp','q1','q2','q3','A1','A2','A3','A4','B1','B2','B3','B4','C1','C2','C3','C4','D1','D2','E1','E2','gender','age','occupation','income','email'];
+    const hdr = {'timestamp':'时间','q1':'Q1','q2':'Q2','q3':'Q3','A1':'A1','A2':'A2','A3':'A3','A4':'A4','B1':'B1','B2':'B2','B3':'B3','B4':'B4','C1':'C1','C2':'C2','C3':'C3','C4':'C4','D1':'D1','D2':'D2','E1':'E1','E2':'E2','gender':'性别','age':'年龄','occupation':'职业','income':'收入','email':'邮箱'};
+    let html = '<table><thead><tr><th>#</th>' + cols.map(c=>`<th>${hdr[c]||c}</th>`).join('') + '</tr></thead><tbody>';
+    data.forEach((row, i) => {
+      html += `<tr><td style="color:#bbb;font-size:12px;">${i+1}</td>` + cols.map(c => {
+        let v = row[c] || '';
+        if (c === 'timestamp') v = v.replace('T',' ').substring(0,19);
+        return `<td>${v}</td>`;
+      }).join('') + '</tr>';
+    });
+    html += '</tbody></table>';
+    $('raw-content').innerHTML = html;
+  } else {
+    $('raw-content').innerHTML = '<p style="color:#bbb;font-size:14px;padding:20px 0;">暂无数据。</p>';
+  }
+}
+
+// =================== EXPORT ===================
+function exportCSV() {
+  const data = loadData();
+  if (!data.length) { alert('暂无数据可导出。'); return; }
+  const cols = ['timestamp','q1','q2','q3','A1','A2','A3','A4','B1','B2','B3','B4','C1','C2','C3','C4','D1','D2','E1','E2','gender','age','occupation','income','email'];
+  let csv = cols.join(',') + '\n';
+  data.forEach(row => {
+    csv += cols.map(c => '"' + String(row[c]||'').replace(/"/g,'""') + '"').join(',') + '\n';
+  });
+  downloadFile(csv, '凤冠冰箱贴问卷数据_' + new Date().toISOString().substring(0,10) + '.csv', 'text/csv;charset=utf-8;');
+}
+
+function exportJSON() {
+  const data = loadData();
+  if (!data.length) { alert('暂无数据可导出。'); return; }
+  downloadFile(JSON.stringify(data, null, 2), '凤冠冰箱贴问卷数据_' + new Date().toISOString().substring(0,10) + '.json', 'application/json');
+}
+
+function downloadFile(content, filename, mime) {
+  const blob = new Blob(['\uFEFF' + content], {type: mime});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function clearData() {
+  if (confirm('确定要清空所有已收集的问卷数据吗？此操作不可撤销！')) {
+    localStorage.removeItem('survey_data');
+    renderStats();
+    alert('数据已清空。');
+  }
+}
+
+// =================== PASSWORD AUTH ===================
+const PWD_HASH = 'c0aa6666f4e2d9a4d6bedadd640426ff28e4986041aac26ed5694bf563a570f3';
+
+function isAuthenticated() {
+  return sessionStorage.getItem('admin_auth') === 'true';
+}
+
+async function verifyPassword() {
+  const input = $('pwd-input').value.trim();
+  if (!input) { $('pwd-err').style.display = 'block'; $('pwd-err').textContent = '请输入密码。'; return; }
+  const encoder = new TextEncoder();
+  const data = encoder.encode(input);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  if (hashHex === PWD_HASH) {
+    sessionStorage.setItem('admin_auth', 'true');
+    closePwdModal();
+    showDataPanel();
+  } else {
+    $('pwd-err').style.display = 'block';
+    $('pwd-err').textContent = '密码错误，请重试。';
+    $('pwd-input').value = '';
+    $('pwd-input').focus();
+  }
+}
+
+function openPwdModal() {
+  $('pwd-overlay').classList.add('show');
+  $('pwd-input').value = '';
+  $('pwd-err').style.display = 'none';
+  setTimeout(() => $('pwd-input').focus(), 150);
+}
+
+function closePwdModal() {
+  $('pwd-overlay').classList.remove('show');
+}
+
+// =================== INIT ===================
+updateProgress();
+
+window.addEventListener('load', () => {
+  const data = loadData();
+  if (data.length > 0 && isAuthenticated()) {
+    const banner = $('notice-banner');
+    banner.style.display = 'block';
+    banner.innerHTML = `已有 <strong>${data.length}</strong> 份问卷数据。<a href="#data-panel" onclick="showDataPanel();return false;">查看统计面板</a>`;
+  }
+});
+</script>
+</body>
+</html>
