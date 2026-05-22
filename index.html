@@ -555,6 +555,14 @@
   }
   .data-panel-close:hover { color: #666; background: #f5f0e8; }
 
+  /* ===== DELETE ROW ===== */
+  .btn-del-row {
+    background: none; border: 1px solid #e8ddd0; color: #c0392b;
+    font-size: 13px; cursor: pointer; padding: 3px 10px; border-radius: 6px;
+    font-family: inherit; white-space: nowrap; transition: all 0.2s;
+  }
+  .btn-del-row:hover { background: #fdf0ee; border-color: #e74c3c; }
+
   /* ===== DIVIDER ===== */
   .section-divider {
     height: 1px;
@@ -1444,13 +1452,13 @@ function renderStats() {
   if (n > 0) {
     const cols = ['timestamp','q1','q2','q3','A1','A2','A3','A4','B1','B2','B3','B4','C1','C2','C3','C4','D1','D2','E1','E2','gender','age','occupation','income','email'];
     const hdr = {'timestamp':'时间','q1':'Q1','q2':'Q2','q3':'Q3','A1':'A1','A2':'A2','A3':'A3','A4':'A4','B1':'B1','B2':'B2','B3':'B3','B4':'B4','C1':'C1','C2':'C2','C3':'C3','C4':'C4','D1':'D1','D2':'D2','E1':'E1','E2':'E2','gender':'性别','age':'年龄','occupation':'职业','income':'收入','email':'邮箱'};
-    let html = '<table><thead><tr><th>#</th>' + cols.map(c=>`<th>${hdr[c]||c}</th>`).join('') + '</tr></thead><tbody>';
+    let html = '<table><thead><tr><th>#</th>' + cols.map(c=>`<th>${hdr[c]||c}</th>`).join('') + '<th>操作</th></tr></thead><tbody>';
     data.forEach((row, i) => {
       html += `<tr><td style="color:#bbb;font-size:12px;">${i+1}</td>` + cols.map(c => {
         let v = row[c] || '';
         if (c === 'timestamp') v = v.replace('T',' ').substring(0,19);
         return `<td>${v}</td>`;
-      }).join('') + '</tr>';
+      }).join('') + `<td><button class="btn-del-row" onclick="deleteEntry(${i})" title="删除该条记录">🗑 删除</button></td></tr>`;
     });
     html += '</tbody></table>';
     $('raw-content').innerHTML = html;
@@ -1496,6 +1504,17 @@ function clearData() {
   }
 }
 
+function deleteEntry(index) {
+  const data = loadData();
+  if (index < 0 || index >= data.length) return;
+  const entry = data[index];
+  const preview = entry.timestamp ? entry.timestamp.replace('T',' ').substring(0,19) : '未知时间';
+  if (!confirm(`确认删除 ${preview} 的这条记录吗？\n\n此操作不可撤销。`)) return;
+  data.splice(index, 1);
+  localStorage.setItem('survey_data', JSON.stringify(data));
+  renderStats();
+}
+
 // =================== PASSWORD AUTH ===================
 const PWD_HASH = 'c0aa6666f4e2d9a4d6bedadd640426ff28e4986041aac26ed5694bf563a570f3';
 
@@ -1516,35 +1535,4 @@ async function verifyPassword() {
     closePwdModal();
     showDataPanel();
   } else {
-    $('pwd-err').style.display = 'block';
-    $('pwd-err').textContent = '密码错误，请重试。';
-    $('pwd-input').value = '';
-    $('pwd-input').focus();
-  }
-}
-
-function openPwdModal() {
-  $('pwd-overlay').classList.add('show');
-  $('pwd-input').value = '';
-  $('pwd-err').style.display = 'none';
-  setTimeout(() => $('pwd-input').focus(), 150);
-}
-
-function closePwdModal() {
-  $('pwd-overlay').classList.remove('show');
-}
-
-// =================== INIT ===================
-updateProgress();
-
-window.addEventListener('load', () => {
-  const data = loadData();
-  if (data.length > 0 && isAuthenticated()) {
-    const banner = $('notice-banner');
-    banner.style.display = 'block';
-    banner.innerHTML = `已有 <strong>${data.length}</strong> 份问卷数据。<a href="#data-panel" onclick="showDataPanel();return false;">查看统计面板</a>`;
-  }
-});
-</script>
-</body>
-</html>
+    $('
